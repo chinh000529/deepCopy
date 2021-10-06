@@ -10,6 +10,8 @@ function deepCopy(a){
                     arr[j] = deepCopy(values[i][j])
                 }
                 b[keys[i]] = arr;
+            } else if(typeof values[i] === "function") {
+                b[keys[i]] = values[i];
             } else if(values[i] instanceof Object) {
                 b[keys[i]] = deepCopy(values[i]);
             }
@@ -27,9 +29,9 @@ function deepCopy(a){
 let obj1 = {
     name: 'chinh',
     age: 18,
-    // run: function(){
-    //     console.log('running...');
-    // },
+    run: function() {
+        console.log('running...');
+    },
     pet: [
         {
             name: 'cun',
@@ -45,6 +47,9 @@ let obj1 = {
         name: 'tam',
         age: 40,
         phone: ['0964736', '98257232'],
+        run: function() {
+            console.log('running...');
+        }
     }
 }
 
@@ -52,4 +57,8 @@ let obj2 =  deepCopy(obj1);
 
 console.log(obj1);
 console.log(obj2);
+
+console.log(obj1.run());
+console.log(obj2.run());
+
 console.log(obj1 === obj2);
